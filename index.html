@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patitas - Adopción y Crowdfunding Comunitario</title>
+    <!-- Importación de Tipografías desde Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- PALETA DE COLORES Y VARIABLES PRINCIPALES --- */
+        :root {
+            --bg-cream: #FAF5EE;      
+            --amber: #D97706;         
+            --rust: #A34A23;          
+            --rust-dark: #7D3416;     
+            --coffee: #3E2723;        
+            --coffee-light: #5D4037;  
+            --text-dark: #2A1A15;     
+            --white: #FFFFFF;
+            --success: #2E7D32;       
+            --urgent: #C62828;        
+            
+            --font-serif: 'Fraunces', serif;
+            --font-sans: 'DM Sans', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            font-family: var(--font-sans);
+            line-height: 1.5;
+        }
+
+        /* --- NAVBAR & HEADER --- */
+        header {
+            background-color: var(--white);
+            border-bottom: 1px solid rgba(62, 39, 35, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--coffee);
+            cursor: pointer;
+        }
+
+        .logo-circle {
+            width: 45px;
+            height: 45px;
+            background-color: var(--rust);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-cream);
+            font-size: 1.4rem;
+        }
+
+        .logo-text h1 {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--amber);
+            text-transform: uppercase;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--coffee-light);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--rust);
+        }
+
+        .btn-nav-action {
+            background-color: var(--rust);
+            color: var(--white);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            border: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-nav-action:hover {
+            background-color: var(--rust-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-nav-outline {
+            background-color: transparent;
+            border: 2px solid var(--amber);
+            color: var(--coffee);
+        }
+        .btn-nav-outline:hover {
+            background-color: var(--amber);
+            color: var(--white);
+        }
+
+        /* --- MAIN WRAPPER & SECTIONS --- */
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .page-view {
+            display: none;
+        }
+
+        .page-view.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- SECCIÓN INICIO --- */
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 2rem;
+            background-color: var(--coffee);
+            color: var(--white);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(42, 26, 21, 0.15);
+        }
+
+        .hero-content {
+            padding: 3.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-content h2 {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h2 span {
+            color: var(--amber);
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: #D7CCC8;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .hero-stats {
+            background-image: linear-gradient(rgba(42, 26, 21, 0.5), rgba(42, 26, 21, 0.5)), url('https://images.unsplash.com/photo-1548767797-d8c844163c4c?q=80&w=800&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .stat-box {
+            background-color: rgba(255, 255, 255, 0.95);
+            color: var(--text-dark);
+            padding: 1.2rem;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--rust);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--coffee-light);
+            margin-top: 4px;
+        }
+
+        /* BLOQUE EXCLUSIVO DE VALIDACIÓN (SOLO EN INICIO) */
+        .trust-block {
+            background-color: var(--white);
+            border: 1px solid rgba(62, 39, 35, 0.08);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 2.5rem;
+        }
+
+        .trust-badges {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .badge-box {
+            border: 1px solid rgba(62, 39, 35, 0.06);
+            padding: 1.2rem;
+            border-radius: 16px;
+            background-color: var(--bg-cream);
+        }
+
+        .badge-box h4 {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            color: var(--coffee);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-info-panel {
+            background-color: var(--coffee);
+            color: var(--white);
+            padding: 2.2rem;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .contact-text h5 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--amber);
+        }
+
+        .contact-text p {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        /* --- INTERFAZ DE GALERÍA Y FILTROS --- */
+        .gallery-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .filter-sidebar {
+            background-color: var(--white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid rgba(62, 39, 35, 0.08);
+            position: sticky;
+            top: 100px;
+        }
+
+        .filter-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-section h4 {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            color: var(--coffee);
+            margin-bottom: 0.8rem;
+            border-bottom: 2px solid var(--bg-cream);
+            padding-bottom: 4px;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        .filter-option input {
+            accent-color: var(--rust);
+        }
+
+        /* --- CUADRÍCULAS DE TARJETAS --- */
+        .pets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .pet-card {
+            background-color: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(62, 39, 35, 0.06);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .pet-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(62, 39, 35, 0.08);
+        }
+
+        .pet-img-container {
+            width: 100%;
+            height: 240px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .badge-security {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background-color: rgba(46, 125, 50, 0.95);
+            color: var(--white);
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .badge-urgent {
+            background-color: var(--urgent) !important;
+        }
+
+        .pet-info {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .pet-name {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--coffee);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .pet-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .pet-tag {
+            background-color: #EFEBE9;
+            color: var(--coffee-light);
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+        }
+
+        .pet-description {
+            font-size: 0.85rem;
+            color: var(--coffee-light);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .btn-card-adopt {
+            width: 100%;
+            background-color: var(--rust);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .btn-card-adopt:hover {
+            background-color: var(--rust-dark);
+        }
+
+        /* --- SECCIÓN SEGUIMIENTO Y AYUDA (CROWDFUNDING) --- */
+        .section-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .section-intro h2 {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            color: var(--coffee);
+            margin-bottom: 0.5rem;
+        }
+
+        .cause-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        .cause-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(62, 39, 35, 0.08);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .progress-bar-container {
+            background-color: #EFEBE9;
+            height: 10px;
+            border-radius: 5px;
+            margin: 1rem 0 0.5rem 0;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            background-color: var(--amber);
+            height: 100%;
+            transition: width 0.6s ease-in-out;
+        }
+
+        .cause-stats-inline {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--coffee-light);
+        }
+
+        /* --- FORMULARIOS REALES --- */
+        .form-layout {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: var(--white);
+            border-radius: 24px;
+            border: 1px solid rgba(62, 39, 35, 0.08);
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+
+        .form-header-bar {
+            background-color: var(--coffee);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .form-header-bar h2 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+        }
+
+        .form-body {
+            padding: 2.5rem;
+        }
+
+        .form-section-title {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            color: var(--rust);
+            margin: 1.5rem 0 1rem 0;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #EFEBE9;
+        }
+
+        .input-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--coffee);
+            margin-bottom: 0.4rem;
+        }
+
+        .input-group input, .input-group select, .input-group textarea {
+            width: 100%;
+            padding: 0.75rem 0.9rem;
+            border-radius: 8px;
+            border: 1px solid #D7CCC8;
+            background-color: var(--bg-cream);
+            font-size: 0.95rem;
+            font-family: inherit;
+        }
+
+        .upload-wrapper {
+            border: 2px dashed var(--amber);
+            background-color: #FFFDE7;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .upload-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(42, 26, 21, 0.72);
+            border-radius: 10px;
+            z-index: 1;
+        }
+
+        .upload-text {
+            position: relative;
+            z-index: 2;
+            color: var(--white);
+        }
+
+        .btn-submit-form {
+            width: 100%;
+            background-color: var(--success);
+            color: var(--white);
+            border: none;
+            padding: 0.9rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .btn-submit-form:hover {
+            opacity: 0.9;
+        }
+
+        /* --- MODAL ESTILO GOFUNDME (CON PANEL DE ERROR) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 1rem;
+        }
+
+        .modal.active { display: flex; }
+
+        .modal-content {
+            background-color: var(--white);
+            border-radius: 24px;
+            max-width: 500px;
+            width: 100%;
+            padding: 2.5rem;
+            position: relative;
+            border-top: 8px solid var(--amber);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .btn-close-modal {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: none; border: none;
+            font-size: 1.5rem; cursor: pointer;
+            color: var(--coffee-light);
+        }
+
+        .amount-selector {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 1.2rem 0;
+        }
+
+        .btn-amount {
+            background-color: var(--bg-cream);
+            border: 2px solid #D7CCC8;
+            color: var(--coffee);
+            padding: 0.7rem;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-amount:hover, .btn-amount.selected {
+            background-color: var(--amber);
+            border-color: var(--amber);
+            color: var(--white);
+        }
+
+        .custom-amount-wrapper {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .custom-amount-wrapper span {
+            position: absolute;
+            left: 15px; top: 50%;
+            transform: translateY(-50%);
+            font-weight: 700;
+            color: var(--coffee-light);
+            font-size: 1.2rem;
+        }
+
+        .input-custom-amount {
+            width: 100%;
+            padding: 0.8rem 0.8rem 0.8rem 2rem;
+            border-radius: 12px;
+            border: 2px solid #D7CCC8;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--coffee);
+            background-color: var(--bg-cream);
+        }
+
+        .pasarela-tarjeta {
+            background-color: #FDFBF7;
+            border: 1px solid rgba(62, 39, 35, 0.1);
+            padding: 1.2rem;
+            border-radius: 16px;
+            margin-top: 1rem;
+        }
+
+        .pasarela-tarjeta input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #D7CCC8;
+            border-radius: 8px;
+            background-color: var(--white);
+            font-size: 0.95rem;
+        }
+
+        .error-screen {
+            display: none;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .error-icon {
+            font-size: 3.5rem;
+            color: var(--urgent);
+            margin-bottom: 1rem;
+        }
+
+        /* TOAST NOTIFICATION */
+        .toast-notification {
+            position: fixed;
+            top: 25px; right: 25px;
+            background-color: var(--success);
+            color: var(--white);
+            padding: 1.2rem 1.8rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(120%);
+            transition: transform 0.4s ease;
+        }
+
+        .toast-notification.show { transform: translateX(0); }
+
+        @media (max-width: 992px) {
+            .hero-section { grid-template-columns: 1fr; }
+            .gallery-layout { grid-template-columns: 1fr; }
+            .trust-block { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- --- NAV BAR / ENCABEZADO --- -->
+    <header>
+        <div class="nav-container">
+            <a onclick="navigateTo('view-inicio')" class="logo-area">
+                <div class="logo-circle">🐾</div>
+                <div class="logo-text">
+                    <h1>Patitas</h1>
+                    <span>Plataforma Segura</span>
+                </div>
+            </a>
+            <nav class="nav-menu">
+                <span id="link-inicio" class="nav-link active" onclick="navigateTo('view-inicio')">Inicio</span>
+                <span id="link-mascotas" class="nav-link" onclick="navigateTo('view-mascotas')">Mascotas</span>
+                <span id="link-ayuda" class="nav-link" onclick="navigateTo('view-ayuda')">Causa Patitas</span>
+                <button class="btn-nav-action btn-nav-outline" onclick="navigateTo('view-publicar')">Dar en adopción</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container">
+
+        <!-- ================= VISTA 1: INICIO (CON CERTIFICADO DE AUTENTICIDAD) ================= -->
+        <section id="view-inicio" class="page-view active">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h2>Financia y salva <span>vidas animales</span></h2>
+                    <p>Adopta de forma responsable con nuestro sistema de verificación o apoya directamente operaciones médicas urgentes a través de nuestra pasarela segura.</p>
+                    <div style="display: flex; gap: 1rem;">
+                        <button class="btn-nav-action" onclick="navigateTo('view-ayuda')">Ver Causas Activas</button>
+                        <button class="btn-nav-action btn-nav-outline" onclick="navigateTo('view-mascotas')" style="color:var(--white);">Ver Adopciones</button>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-box">
+                        <div class="stat-number" id="global-recaudado">$142,500</div>
+                        <div class="stat-label">Total Recaudado Colectivamente</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- APARTADO DE VALIDACIÓN Y CONTROL (EXCLUSIVO DE LA PÁGINA DE INICIO) -->
+            <div class="trust-block">
+                <div>
+                    <h3 style="font-family: var(--font-serif); font-size: 1.8rem; color: var(--coffee); margin-bottom: 0.5rem;">Plataforma 100% Real y Verificada</h3>
+                    <p style="color: var(--coffee-light); font-size: 0.95rem;">En <strong>Patitas</strong> nos tomamos la seguridad muy en serio. No somos una base de datos anónima; cada refugio, rescatista independiente y campaña de recaudación pasa por un estricto filtro de auditoría física antes de publicarse.</p>
+                    
+                    <div class="trust-badges">
+                        <div class="badge-box">
+                            <h4>✅ Cero Fraudes</h4>
+                            <p style="font-size: 0.85rem; color: var(--coffee-light);">Todas las donaciones van directo a las clínicas asociadas, impidiendo desvíos de capital.</p>
+                        </div>
+                        <div class="badge-box">
+                            <h4>📍 Visitas Físicas</h4>
+                            <p style="font-size: 0.85rem; color: var(--coffee-light);">Validamos las condiciones de las mascotas registradas para asegurar adopciones legítimas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-info-panel">
+                    <h4 style="font-family: var(--font-serif); font-size: 1.3rem;">Contacto Oficial</h4>
+                    <div class="contact-row">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-text">
+                            <h5>Línea Directa / WhatsApp</h5>
+                            <p>+52 (55) 4163-8799</p>
+                        </div>
+                    </div>
+                    <div class="contact-row">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-text">
+                            <h5>Correo de Soporte</h5>
+                            <p>contacto@patitasseguras.org</p>
+                        </div>
+                    </div>
+                    <div class="contact-row">
+                        <div class="contact-icon">🏢</div>
+                        <div class="contact-text">
+                            <h5>Oficina</h5>
+                            <p>Av. Chapultepec 342, CDMX, México</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= VISTA 2: GALERÍA DE MASCOTAS (MÁS ESPECIES) ================= -->
+        <section id="view-mascotas" class="page-view">
+            <h2 style="font-family: var(--font-serif); font-size: 2rem; margin-bottom: 1.5rem; color: var(--coffee);">Mascotas Buscando un Hogar</h2>
+            <div class="gallery-layout">
+                <aside class="filter-sidebar">
+                    <div class="filter-section">
+                        <h4>Filtrar Especie</h4>
+                        <label class="filter-option"><input type="checkbox" checked> Perros y Gatos</label>
+                        <label class="filter-option"><input type="checkbox" checked> Aves y Pájaros</label>
+                        <label class="filter-option"><input type="checkbox" checked> Reptiles / Iguanas</label>
+                        <label class="filter-option"><input type="checkbox" checked> Arácnidos / Exóticos</label>
+                    </div>
+                </aside>
+                
+                <div class="pets-grid">
+                    <!-- Ficha 1: Oliver (Perro) -->
+                    <div class="pet-card">
+                        <div class="pet-img-container" style="background-image: url('https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=400&auto=format&fit=crop');">
+                            <div class="badge-security">🛡️ Identidad Validada</div>
+                        </div>
+                        <div class="pet-info">
+                            <span class="pet-name">Oliver</span>
+                            <div class="pet-tags">
+                                <span class="pet-tag">Perro</span>
+                                <span class="pet-tag">1 Año</span>
+                                <span class="pet-tag">Mediano</span>
+                            </div>
+                            <p class="pet-description">Muy cariñoso, vacunado y obediente. Busca una familia activa que ame salir a correr.</p>
+                            <button class="btn-card-adopt" onclick="openAdoptionForm('Oliver')">Iniciar Solicitud</button>
+                        </div>
+                    </div>
+
+                    <!-- Ficha 2: Luna (Gato) -->
+                    <div class="pet-card">
+                        <div class="pet-img-container" style="background-image: url('https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=400&auto=format&fit=crop');">
+                            <div class="badge-security">🛡️ Identidad Validada</div>
+                        </div>
+                        <div class="pet-info">
+                            <span class="pet-name">Luna</span>
+                            <div class="pet-tags">
+                                <span class="pet-tag">Gato</span>
+                                <span class="pet-tag">5 Meses</span>
+                                <span class="pet-tag">Pequeño</span>
+                            </div>
+                            <p class="pet-description">Gatita rescatada sumamente hogareña, tranquila y perfecta para estar en departamentos.</p>
+                            <button class="btn-card-adopt" onclick="openAdoptionForm('Luna')">Iniciar Solicitud</button>
+                        </div>
+                    </div>
+
+                    <!-- Ficha 3: Piko (Pájaro) -->
+                    <div class="pet-card">
+                        <div class="pet-img-container" style="background-image: url('https://images.unsplash.com/photo-1522850959409-a1b7fe007da7?q=80&w=400&auto=format&fit=crop');">
+                            <div class="badge-security">🛡️ Identidad Validada</div>
+                        </div>
+                        <div class="pet-info">
+                            <span class="pet-name">Piko</span>
+                            <div class="pet-tags">
+                                <span class="pet-tag">Cacatúa / Ave</span>
+                                <span class="pet-tag">2 Años</span>
+                                <span class="pet-tag">Pequeño</span>
+                            </div>
+                            <p class="pet-description">Sociable, acostumbrado al contacto humano y muy alegre. Necesita un espacio bien iluminado.</p>
+                            <button class="btn-card-adopt" onclick="openAdoptionForm('Piko')">Iniciar Solicitud</button>
+                        </div>
+                    </div>
+
+                    <!-- Ficha 4: Rango (Iguana) -->
+                    <div class="pet-card">
+                        <div class="pet-img-container" style="background-image: url('https://images.unsplash.com/photo-1504450758481-7338eba7524a?q=80&w=400&auto=format&fit=crop');">
+                            <div class="badge-security">🛡️ Identidad Validada</div>
+                        </div>
+                        <div class="pet-info">
+                            <span class="pet-name">Rango</span>
+                            <div class="pet-tags">
+                                <span class="pet-tag">Iguana Verde</span>
+                                <span class="pet-tag">3 Años</span>
+                                <span class="pet-tag">Grande</span>
+                            </div>
+                            <p class="pet-description">Ejemplar dócil rescatado de comercio ilegal. Requiere un terrario amplio con control de temperatura.</p>
+                            <button class="btn-card-adopt" onclick="openAdoptionForm('Rango')">Iniciar Solicitud</button>
+                        </div>
+                    </div>
+
+                    <!-- Ficha 5: Charlotte (Araña) -->
+                    <div class="pet-card">
+                        <div class="pet-img-container" style="background-image: url('https://images.unsplash.com/photo-1603123853880-a92fafb7809f?q=80&w=400&auto=format&fit=crop');">
+                            <div class="badge-security">🛡️ Identidad Validada</div>
+                        </div>
+                        <div class="pet-info">
+                            <span class="pet-name">Charlotte</span>
+                            <div class="pet-tags">
+                                <span class="pet-tag">Tarántula</span>
+                                <span class="pet-tag">1 Año</span>
+                                <span class="pet-tag">Exótico</span>
+                            </div>
+                            <p class="pet-description">Tarántula de anillos rojos. Especie fascinante para cuidadores responsables y conocedores.</p>
+                            <button class="btn-card-adopt" onclick="openAdoptionForm('Charlotte')">Iniciar Solicitud</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= VISTA 3: FORMULARIO EXTREMO CON INFORMACIÓN PERSONAL E IDENTIFICACIÓN ================= -->
+        <section id="view-adoptar-form" class="page-view">
+            <div class="form-layout">
+                <div class="form-header-bar">
+                    <h2>Solicitud Estricta para <span id="adopt-pet-name" style="color: var(--amber);">Mascota</span></h2>
+                    <p>Por seguridad legal de la mascota, requerimos validación obligatoria de identidad.</p>
+                </div>
+                <div class="form-body">
+                    <div class="form-section-title">1. Datos Personales Obligatorios</div>
+                    <div class="input-group">
+                        <label>Nombre Completo (Igual que en tu identificación)</label>
+                        <input type="text" id="adopt-name" placeholder="Tu nombre y apellidos completos">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="input-group">
+                            <label>Clave CURP</label>
+                            <input type="text" id="adopt-curp" placeholder="18 caracteres de tu CURP" maxlength="18" style="text-transform: uppercase;">
+                        </div>
+                        <div class="input-group">
+                            <label>Teléfono Celular</label>
+                            <input type="tel" id="adopt-phone" placeholder="Ej. 5512345678">
+                        </div>
+                    </div>
+
+                    <div class="form-section-title">2. Documentación Oficial de Identidad</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 1.5rem;">
+                        <div>
+                            <label style="display:block; font-weight:700; font-size:0.9rem; color:var(--coffee); margin-bottom:0.4rem;">Identificación Oficial (INE / Pasaporte)</label>
+                            <div class="upload-wrapper" style="background-image: url('https://images.unsplash.com/photo-1554774853-aae0a22c8aa4?q=80&w=400&auto=format&fit=crop'); min-height: 100px;">
+                                <div class="upload-overlay"></div>
+                                <div class="upload-text">
+                                    <p style="font-size: 0.8rem; font-weight:700;">📸 Subir Frente y Vuelta</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label style="display:block; font-weight:700; font-size:0.9rem; color:var(--coffee); margin-bottom:0.4rem;">Comprobante de Domicilio</label>
+                            <div class="upload-wrapper" style="background-image: url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400&auto=format&fit=crop'); min-height: 100px;">
+                                <div class="upload-overlay"></div>
+                                <div class="upload-text">
+                                    <p style="font-size: 0.8rem; font-weight:700;">📸 Subir Luz, Agua o Predial</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section-title">3. Motivos de Adopción</div>
+                    <div class="input-group">
+                        <label>¿Por qué consideras que eres apto para cuidar a esta especie?</label>
+                        <textarea id="adopt-reason" rows="3" placeholder="Detalla tu experiencia previa o planes de cuidado..."></textarea>
+                    </div>
+
+                    <button class="btn-submit-form" onclick="submitAdoptionRequest()">Enviar Expediente a Validación Legal</button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= VISTA 4: APARTADO DAR EN ADOPCIÓN ================= -->
+        <section id="view-publicar" class="page-view">
+            <div class="form-layout">
+                <div class="form-header-bar" style="background-color: var(--rust);">
+                    <h2>Registrar Mascota para Adopción</h2>
+                    <p>Sube los datos del animalito. El sistema agendará una videollamada para corroborar la información.</p>
+                </div>
+                <div class="form-body">
+                    <div class="form-section-title">Datos Básicos de la Mascota</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="input-group">
+                            <label>Nombre de la Mascota</label>
+                            <input type="text" id="pub-name" placeholder="Ej. Max, Charlotte...">
+                        </div>
+                        <div class="input-group">
+                            <label>Especie</label>
+                            <select id="pub-species">
+                                <option value="Perro">Perro</option>
+                                <option value="Gato">Gato</option>
+                                <option value="Ave">Ave / Pájaro</option>
+                                <option value="Reptil">Reptil / Iguana</option>
+                                <option value="Exótico">Arácnido / Exótico</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Fotografía Clara de la Mascota</label>
+                        <div class="upload-wrapper" style="background-image: url('https://images.unsplash.com/photo-1601758228041-f3b2795255f1?q=80&w=600&auto=format&fit=crop'); min-height: 140px;">
+                            <div class="upload-overlay"></div>
+                            <div class="upload-text">
+                                <span style="font-size: 1.5rem;">📸</span>
+                                <p style="font-size: 0.9rem; font-weight:700; margin-top: 3px;">Haga clic aquí para cargar imagen</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn-submit-form" style="background-color: var(--rust);" onclick="submitPublishPet()">Publicar Mascota</button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= VISTA 5: CAUSA PATITAS (MÁS CAMPAÑAS TODAS CON FOTOS) ================= -->
+        <section id="view-ayuda" class="page-view">
+            <div class="section-intro">
+                <h2>Campaña Colectiva — Crowdfunding Solidario</h2>
+                <p>Donaciones seguras destinadas en un 100% a la cobertura médica y de infraestructura de animales vulnerables.</p>
+            </div>
+
+            <div class="cause-grid">
+                <!-- Campaña 1 -->
+                <div class="cause-card" id="card-gandy">
+                    <div class="pet-img-container" style="background-image: url('https://images.unsplash.com/photo-1584263347416-85a696b4da74?q=80&w=400&auto=format&fit=crop');">
+                        <div class="badge-security badge-urgent">🚨 Cirugía Médica Urgente</div>
+                    </div>
+                    <div class="pet-info">
+                        <span class="pet-name">Cirugía de Cadera de Gandy</span>
+                        <p style="font-size:0.85rem; color:var(--coffee-light); margin-bottom:1rem; flex-grow:1;">Perrito atropellado que necesita clavos ortopédicos y reconstrucción pélvica inmediata.</p>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" id="progress-gandy" style="width: 65%;"></div>
+                        </div>
+                        <div class="cause-stats-inline" style="margin-bottom:1rem;">
+                            <div>Recaudado: <span id="current-gandy" style="color:var(--success); font-size:1rem;">$7,800</span></div>
+                            <div>Meta: <span>$12,000</span></div>
+                        </div>
+                        <button class="btn-card-adopt" style="background-color:var(--urgent);" onclick="openGoFundMeModal('gandy', 'Cirugía de Cadera de Gandy', 7800, 12000)">Donar Ahora</button>
+                    </div>
+                </div>
+
+                <!-- Campaña 2 -->
+                <div class="cause-card" id="card-mia">
+                    <div class="pet-img-container" style="background-image: url('https://images.unsplash.com/photo-1629898569904-6725227aa6f2?q=80&w=400&auto=format&fit=crop');">
+                        <div class="badge-security badge-urgent">🚨 Tratamiento Respiratorio</div>
+                    </div>
+                    <div class="pet-info">
+                        <span class="pet-name">Tratamiento para la Gatita Mia</span>
+                        <p style="font-size:0.85rem; color:var(--coffee-light); margin-bottom:1rem; flex-grow:1;">Diagnosticada con neumonía severa. Requiere hospitalización continua y suministro de oxígeno.</p>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" id="progress-mia" style="width: 40%;"></div>
+                        </div>
+                        <div class="cause-stats-inline" style="margin-bottom:1rem;">
+                            <div>Recaudado: <span id="current-mia" style="color:var(--success); font-size:1rem;">$2,400</span></div>
+                            <div>Meta: <span>$6,000</span></div>
+                        </div>
+                        <button class="btn-card-adopt" style="background-color:var(--urgent);" onclick="openGoFundMeModal('mia', 'Tratamiento Respiratorio Mia', 2400, 6000)">Donar Ahora</button>
+                    </div>
+                </div>
+
+                <!-- Campaña 3 -->
+                <div class="cause-card" id="card-refugio">
+                    <div class="pet-img-container" style="background-image: url('https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?q=80&w=400&auto=format&fit=crop');">
+                        <div class="badge-security badge-urgent">🚨 Reconstrucción por Daños</div>
+                    </div>
+                    <div class="pet-info">
+                        <span class="pet-name">Reconstrucción Refugio Sur</span>
+                        <p style="font-size:0.85rem; color:var(--coffee-light); margin-bottom:1rem; flex-grow:1;">Fondos urgentes para reparar jaulas dañadas y techar el patio de reposo invernal.</p>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" id="progress-refugio" style="width: 15%;"></div>
+                        </div>
+                        <div class="cause-stats-inline" style="margin-bottom:1rem;">
+                            <div>Recaudado: <span id="current-refugio" style="color:var(--success); font-size:1rem;">$4,500</span></div>
+                            <div>Meta: <span>$30,000</span></div>
+                        </div>
+                        <button class="btn-card-adopt" style="background-color:var(--urgent);" onclick="openGoFundMeModal('refugio', 'Reconstrucción Refugio Sur', 4500, 30000)">Donar Ahora</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
+    <!-- ================= MODAL DE DONACIONES (CON ERROR OBLIGATORIO) ================= -->
+    <div class="modal" id="modal-gofundme">
+        <div class="modal-content">
+            <button class="btn-close-modal" onclick="closeGoFundMeModal()">✕</button>
+            
+            <!-- PANEL DEL FORMULARIO -->
+            <div id="gofundme-form-panel">
+                <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; color: var(--amber);">Estás apoyando la campaña:</span>
+                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; color: var(--coffee); margin: 0.2rem 0 1.2rem 0;" id="gofundme-title">Campaña</h3>
+                
+                <label style="font-weight: 700; font-size: 0.9rem;">Selecciona una cantidad (MXN):</label>
+                <div class="amount-selector">
+                    <button class="btn-amount" onclick="selectPresetAmount(100, this)">$100</button>
+                    <button class="btn-amount selected" onclick="selectPresetAmount(200, this)">$200</button>
+                    <button class="btn-amount" onclick="selectPresetAmount(500, this)">$500</button>
+                    <button class="btn-amount" onclick="selectPresetAmount(1000, this)">$1000</button>
+                </div>
+
+                <div class="custom-amount-wrapper">
+                    <span>$</span>
+                    <input type="number" id="input-amount" class="input-custom-amount" value="200" oninput="clearPresetSelection()">
+                </div>
+
+                <div class="pasarela-tarjeta">
+                    <div style="display:flex; justify-content:space-between; margin-bottom: 0.8rem; align-items:center;">
+                        <span style="font-size:0.85rem; font-weight:700; color:var(--coffee);">🔒 Pago Encriptado</span>
+                        <span style="font-size:0.75rem; color:#9E9E9E;">💳 Tarjeta</span>
+                    </div>
+                    <div style="margin-bottom: 0.8rem;">
+                        <input type="text" id="card-number" placeholder="Número de Tarjeta (4152 •••• •••• ••••)">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                        <input type="text" id="card-expiry" placeholder="MM/AA">
+                        <input type="text" id="card-cvv" placeholder="CVV">
+                    </div>
+                </div>
+
+                <button class="btn-submit-form" style="margin-top: 1.5rem; font-size: 1.1rem;" onclick="processGoFundMeDonation()">
+                    Donar con Tarjeta
+                </button>
+            </div>
+
+            <!-- PANEL DE ERROR OBLIGATORIO -->
+            <div id="gofundme-error-panel" class="error-screen">
+                <div class="error-icon">⚠️</div>
+                <h4>Información Obligatoria</h4>
+                <p>No se puede procesar la donación. Es obligatorio introducir los datos de tu tarjeta y un monto válido para poder continuar.</p>
+                <button class="btn-submit-form" style="background-color: var(--coffee); margin-top: 0.5rem;" onclick="backToDonationForm()">
+                    Regresar y Llenar Datos
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICACIÓN DE ÉXITO -->
+    <div id="toast-success" class="toast-notification">
+        <div style="font-size: 1.8rem;">❤️</div>
+        <div>
+            <h5 id="toast-title" style="font-weight:700; font-size:1.05rem;">¡Operación Exitosa!</h5>
+            <p id="toast-body" style="font-size:0.85rem;">Cambios guardados con éxito.</p>
+        </div>
+    </div>
+
+    <!-- --- LÓGICA JAVASCRIPT --- -->
+    <script>
+        let activeCampaignId = '';
+        let activeCurrentAmount = 0;
+        let activeMetaAmount = 0;
+
+        function navigateTo(viewId) {
+            document.querySelectorAll('.page-view').forEach(view => view.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            
+            const targetView = document.getElementById(viewId);
+            if (targetView) targetView.classList.add('active');
+            
+            if (viewId === 'view-inicio') document.getElementById('link-inicio').classList.add('active');
+            if (viewId === 'view-mascotas') document.getElementById('link-mascotas').classList.add('active');
+            if (viewId === 'view-ayuda') document.getElementById('link-ayuda').classList.add('active');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        /* ACCIONES DE ADOPCIÓN Y REGISTRO */
+        function openAdoptionForm(petName) {
+            document.getElementById('adopt-pet-name').innerText = petName;
+            navigateTo('view-adoptar-form');
+        }
+
+        function submitAdoptionRequest() {
+            const name = document.getElementById('adopt-name').value.trim();
+            const phone = document.getElementById('adopt-phone').value.trim();
+            const curp = document.getElementById('adopt-curp').value.trim();
+            
+            if (!name || !phone || !curp || curp.length < 18) {
+                alert("Por favor, llena tu nombre, CURP válido a 18 dígitos y teléfono. Son requisitos legales obligatorios.");
+                return;
+            }
+            showToast("¡Expediente Recibido!", "Nuestros validadores iniciarán el cotejo de tu identificación oficial.");
+            navigateTo('view-mascotas');
+        }
+
+        function submitPublishPet() {
+            const petName = document.getElementById('pub-name').value.trim();
+            if (!petName) {
+                alert("Es obligatorio asignarle un nombre a la mascota para registrarla.");
+                return;
+            }
+            showToast("¡Mascota Registrada!", `${petName} ha entrado a la lista de espera para validación de identidad.`);
+            navigateTo('view-inicio');
+        }
+
+        /* CROWDFUNDING GOFUNDME */
+        function openGoFundMeModal(id, title, current, meta) {
+            activeCampaignId = id;
+            activeCurrentAmount = current;
+            activeMetaAmount = meta;
+            backToDonationForm();
+            document.getElementById('gofundme-title').innerText = title;
+            document.getElementById('modal-gofundme').classList.add('active');
+        }
+
+        function closeGoFundMeModal() {
+            document.getElementById('modal-gofundme').classList.remove('active');
+        }
+
+        function selectPresetAmount(amount, buttonElement) {
+            document.querySelectorAll('.btn-amount').forEach(btn => btn.classList.remove('selected'));
+            buttonElement.classList.add('selected');
+            document.getElementById('input-amount').value = amount;
+        }
+
+        function clearPresetSelection() {
+            document.querySelectorAll('.btn-amount').forEach(btn => btn.classList.remove('selected'));
+        }
+
+        function backToDonationForm() {
+            document.getElementById('gofundme-error-panel').style.display = "none";
+            document.getElementById('gofundme-form-panel').style.display = "block";
+        }
+
+        function processGoFundMeDonation() {
+            const donationValue = parseFloat(document.getElementById('input-amount').value);
+            const numTarjeta = document.getElementById('card-number').value.trim();
+            const expTarjeta = document.getElementById('card-expiry').value.trim();
+            const cvvTarjeta = document.getElementById('card-cvv').value.trim();
+
+            if (!numTarjeta || !expTarjeta || !cvvTarjeta || isNaN(donationValue) || donationValue <= 0) {
+                document.getElementById('gofundme-form-panel').style.display = "none";
+                document.getElementById('gofundme-error-panel').style.display = "block";
+                return;
+            }
+
+            activeCurrentAmount += donationValue;
+            let newPercentage = (activeCurrentAmount / activeMetaAmount) * 100;
+            if (newPercentage > 100) newPercentage = 100;
+
+            document.getElementById(`current-${activeCampaignId}`).innerText = `$${activeCurrentAmount.toLocaleString()}`;
+            document.getElementById(`progress-${activeCampaignId}`).style.width = `${newPercentage}%`;
+
+            let globalElement = document.getElementById('global-recaudado');
+            let currentGlobal = parseFloat(globalElement.innerText.replace('$', '').replace(',', ''));
+            globalElement.innerText = `$${(currentGlobal + donationValue).toLocaleString()}`;
+
+            closeGoFundMeModal();
+            showToast("¡Donación Recibida!", `Has aportado $${donationValue} MXN con éxito.`);
+        }
+
+        function showToast(title, message) {
+            const toast = document.getElementById('toast-success');
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-body').innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 5000);
+        }
+    </script>
+</body>
+</html>
